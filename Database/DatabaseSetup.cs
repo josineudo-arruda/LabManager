@@ -4,9 +4,10 @@ namespace LabManager.Database;
 
 class DatabaseSetup 
 {
-
-    public DatabaseSetup()
+    private DatabaseConfig databaseConfig;
+    public DatabaseSetup(DatabaseConfig databaseConfig)
     {
+        this.databaseConfig = databaseConfig; 
         CreateTableComputer();
         CreateTableLab();
     }
