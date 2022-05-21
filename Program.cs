@@ -6,9 +6,9 @@ using LabManager.Repositories;
 var modelName = args[0];
 var modelAction = args[1];
 
-new DatabaseSetup();
 
-var computerRepository = new ComputerRepository();
+var databaseConfig = new DatabaseConfig(); 
+var computerRepository = new ComputerRepository(databaseConfig);
 
 if(modelName == "Computer")
 {
