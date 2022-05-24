@@ -1,4 +1,6 @@
 using Microsoft.Data.Sqlite;
+using LabManager.Database;
+using LabManager.Models;
 
 namespace LabManager.Database;
 
@@ -13,7 +15,7 @@ class DatabaseSetup
     }
     private void CreateTableComputer()
     {
-        var connection = new SqliteConnection("Data Source=database.db");
+        var connection = new SqliteConnection(databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
@@ -30,7 +32,7 @@ class DatabaseSetup
 
     private void CreateTableLab()
     {
-        var connection = new SqliteConnection("Data Source=database.db");
+        var connection = new SqliteConnection(databaseConfig.ConnectionString);
         connection.Open();
 
         var command = connection.CreateCommand();
