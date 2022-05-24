@@ -13,7 +13,7 @@ class ComputerRepository
     {
         var computers  = new List<Computer>();
         
-        var connection = new SqliteConnection("Data Source=database.db");
+        var connection = new SqliteConnection(databaseConfig.ConnectionString);
         connection.Open();
         
         var command = connection.CreateCommand();
@@ -30,5 +30,20 @@ class ComputerRepository
         connection.Close();
 
         return computers;
+    }
+
+    public void Save(Computer computer)
+    {
+        var connection = new SqliteConnection(databaseConfig.ConnectionString);
+        connection.Open();
+        
+        var command = connection.CreateCommand();
+        command.CommandText = "INSERT INTO Computers VALUES ($id, $ram, $processor);";
+        command.Parameters.AddWithValue("$id", computer.Id);
+        command.Parameters.AddWithValue("$ram", computer.Ram);
+        command.Parameters.AddWithValue("$processor", computer.Processor);
+        
+        command.ExecuteNonQuery();
+        connection.Close();
     }
 }
