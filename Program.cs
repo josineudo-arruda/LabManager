@@ -41,6 +41,18 @@ if(modelName == "Computer")
         var computer = computerRepository.GetById(index);
         Console.WriteLine("{0},{1},{2}", computer.Id, computer.Ram, computer.Processor);
     }
+
+    if(modelAction == "Update")
+    {
+        Console.WriteLine("Computer Update");
+        var id = Convert.ToInt32(args[2]);
+        var ram = args[3];
+        var processor = args[4];
+
+        var computer = new Computer(id, ram, processor);
+        computerRepository.Update(computer);
+        Console.WriteLine("{0},{1},{2}", computer.Id, computer.Ram, computer.Processor);
+    }
 }
 
 if(modelName == "Lab")
