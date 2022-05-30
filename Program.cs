@@ -30,15 +30,16 @@ if(modelName == "Computer")
         var processor = args[4];
         
         var computer = new Computer(id, ram, processor);
-        computerRepository.Save(computer);
+        var result = computerRepository.Save(computer);
+        Console.WriteLine("{0},{1},{2}", result.Id, result.Ram, result.Processor);
     }
 
     if(modelAction == "Show")
     {
         Console.WriteLine("Computer Show");
-        var index = Convert.ToInt32(args[2]);
+        var id = Convert.ToInt32(args[2]);
         
-        var computer = computerRepository.GetById(index);
+        var computer = computerRepository.GetById(id);
         Console.WriteLine("{0},{1},{2}", computer.Id, computer.Ram, computer.Processor);
     }
 
@@ -52,6 +53,15 @@ if(modelName == "Computer")
         var computer = new Computer(id, ram, processor);
         computerRepository.Update(computer);
         Console.WriteLine("{0},{1},{2}", computer.Id, computer.Ram, computer.Processor);
+    }
+
+    if(modelAction == "Delete")
+    {
+        Console.WriteLine("Computer Delete");
+        var id = Convert.ToInt32(args[2]);
+        
+        computerRepository.Delete(id);
+        Console.WriteLine("Computer {0}", id);
     }
 }
 
