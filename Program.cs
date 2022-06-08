@@ -39,8 +39,15 @@ if(modelName == "Computer")
         Console.WriteLine("Computer Show");
         var id = Convert.ToInt32(args[2]);
         
-        var computer = computerRepository.GetById(id);
-        Console.WriteLine("{0},{1},{2}", computer.Id, computer.Ram, computer.Processor);
+        if(computerRepository.existsById(id))
+        {
+            var computer = computerRepository.GetById(id);
+            Console.WriteLine("{0},{1},{2}", computer.Id, computer.Ram, computer.Processor);
+        }
+        else 
+        {
+            Console.WriteLine($"O computador {id} não existe!");
+        }
     }
 
     if(modelAction == "Update")
@@ -50,9 +57,16 @@ if(modelName == "Computer")
         var ram = args[3];
         var processor = args[4];
 
-        var computer = new Computer(id, ram, processor);
-        computerRepository.Update(computer);
-        Console.WriteLine("{0},{1},{2}", computer.Id, computer.Ram, computer.Processor);
+        if(computerRepository.existsById(id))
+        {
+            var computer = new Computer(id, ram, processor);
+            computerRepository.Update(computer);
+            Console.WriteLine("{0},{1},{2}", computer.Id, computer.Ram, computer.Processor);
+        }
+        else 
+        {
+            Console.WriteLine($"O computador {id} não existe!");
+        }
     }
 
     if(modelAction == "Delete")
@@ -60,8 +74,15 @@ if(modelName == "Computer")
         Console.WriteLine("Computer Delete");
         var id = Convert.ToInt32(args[2]);
         
-        computerRepository.Delete(id);
-        Console.WriteLine("Computer {0}", id);
+        if(computerRepository.existsById(id))
+        {
+            computerRepository.Delete(id);
+            Console.WriteLine("Computer {0}", id);
+        }
+        else 
+        {
+            Console.WriteLine($"O computador {id} não existe!");
+        }
     }
 }
 
