@@ -47,8 +47,6 @@ class ComputerRepository
 
         connection.Execute("UPDATE Computers SET ram = @Ram, processor = @Processor WHERE id = @Id",computer);
 
-        connection.Close();
-
         return computer;
     }
 
@@ -65,12 +63,6 @@ class ComputerRepository
         using var connection = new SqliteConnection(databaseConfig.ConnectionString);
         connection.Open();
 
-        return Convert.ToBoolean(connection.ExecuteScalar("SELECT count(id) FROM Computers WHERE id = @id;", new {id = @id}));
-    }
-
-    private Computer readerToComputer(SqliteDataReader reader)
-    {
-        var computer = new Computer(reader.GetInt32(0),reader.GetString(1),reader.GetString(2));
-        return computer;
+        return Convert.ToBoolean(connection.ExecuteScalar("SELECT count(id) FROM Computers WHERE id = @id;", new {id = id}));
     }
 }
